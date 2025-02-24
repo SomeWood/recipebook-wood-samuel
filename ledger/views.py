@@ -7,3 +7,7 @@ from django.template import loader
 def home(request):
 	template = loader.get_template('home.html')
 	return HttpResponse(template.render())
+
+def list(request):
+    template = loader.get_template('list.html')
+    return HttpResponse(template.render())
