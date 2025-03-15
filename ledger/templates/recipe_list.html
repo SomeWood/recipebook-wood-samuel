@@ -2,6 +2,7 @@
 {% load static%}
 
 {% block content%}
+<h3>List of recipes:</h3>
 <ul>
     {% for item in recipes %}
         <li><a href="recipe/{{ item.id }}">{{ item.name }}</a></li>
