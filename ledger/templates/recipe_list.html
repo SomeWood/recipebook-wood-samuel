@@ -3,7 +3,8 @@
 
 {% block content%}
 <ul>
-    <li><p><a href="/recipe/1">Recipe 1</a></p></li>
-    <li><p><a href="/recipe/2">Recipe 2</a></p></li>
+    {% for item in recipes %}
+        <li><a href="recipe/{{ item.id }}">{{ item.name }}</a></li>
+    {% endfor %}
 </ul>
 {% endblock %}
