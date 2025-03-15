@@ -8,12 +8,12 @@ def home(request):
 	template = loader.get_template('home.html')
 	return HttpResponse(template.render())
 
-def list(request):
+def recipe_list(request):
     template = loader.get_template('list.html')
     return HttpResponse(template.render())
 
 
-def recipes(request, number=1):
+def recipe_details(request, number=1):
     if number == 1:
         context = {
             "name": "Recipe 1",
