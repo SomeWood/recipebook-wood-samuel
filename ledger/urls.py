@@ -4,7 +4,7 @@ from .views import recipe_details
 
 urlpatterns = [
 	path("recipes/list", recipe_list, name="recipe_list"),
-    path("recipe/<int:number>", recipe_details, name="recipe_details"),
+    path("recipe/<int:param>", recipe_details, name="recipe_details"),
 ]
 
 app_name = "ledger"
