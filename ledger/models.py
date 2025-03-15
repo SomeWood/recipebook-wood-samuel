@@ -25,6 +25,6 @@ class Recipe(models.Model):
 
 
 class RecipeIngredient(models.Model):
-	name = models.CharField(max_length=255)
+	quantity = models.TextField()
 	ingredient = models.ForeignKey(Ingredient)
 	recipe = models.ForeignKey(Recipe)
