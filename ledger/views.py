@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
+from .models import Ingredient, Recipe, RecipeIngredient
 
 # Create your views here.
 
@@ -9,8 +10,9 @@ def home(request):
 	return HttpResponse(template.render())
 
 def recipe_list(request):
-    template = loader.get_template('list.html')
-    return HttpResponse(template.render())
+    recipes = Recipe.objects.all()
+
+    return render(request, 'recipe_list.html', {'recipes':recipes})
 
 
 def recipe_details(request, number=1):
