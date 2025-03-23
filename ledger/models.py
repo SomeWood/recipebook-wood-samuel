@@ -25,7 +25,7 @@ class Recipe(models.Model):
 	name = models.CharField(max_length=255)
 	author = models.CharField(max_length=255)
 	created_on = models.DateTimeField(auto_now_add=True)
-    updated_on = models.DateTimeField(auto_now=True)
+	updated_on = models.DateTimeField(auto_now=True)
 
 	def __str__(self):
 		return str(self.name)
