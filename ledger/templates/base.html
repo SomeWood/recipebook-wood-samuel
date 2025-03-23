@@ -7,6 +7,11 @@
     </head>
     <body>
         <h1>Recipe Book</h1>
+        <form method="POST" action="{% url 'logout' %}">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Logout</button>
+        </form>
         <div id="content">
             {% block content %}{% endblock %}
         </div>
