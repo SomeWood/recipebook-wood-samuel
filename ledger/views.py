@@ -17,3 +17,7 @@ def recipe_details(request, param):
     recipe = Recipe.objects.get(id=param)
 
     return render(request, 'recipe_details.html', {'recipe':recipe})
+
+def home_page(request):
+
+    return render(request, 'home_page.html')
