@@ -6,6 +6,18 @@
 <form method="post">
     {% csrf_token %}
     {{ recipeForm }}
-    <input type="submit" value="Submit">
+    <input type="submit" name="aaa" value="Submit">
+</form>
+<h3>Add a new ingredient:</h3>
+<form method="post">
+    {% csrf_token %}
+    {{ ingredientForm }}
+    <input type="submit" name="bbb" value="Submit">
+</form>
+<h3>Add an existing ingredient to an existing recipe:</h3>
+<form method="post">
+    {% csrf_token %}
+    {{ recipeIngredientForm }}
+    <input type="submit" name="ccc" value="Submit">
 </form>
 {% endblock %}

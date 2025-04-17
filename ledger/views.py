@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.template import loader
 from .models import Ingredient, Recipe, RecipeIngredient
 from django.contrib.auth.decorators import login_required
-from .forms import RecipeForm
+from .forms import RecipeForm, IngredientForm, RecipeIngredientForm
 
 # Create your views here.
 
@@ -22,10 +22,38 @@ def recipe_details(request, param):
 @login_required
 def recipe_new(request):
     recipes = Recipe.objects.all()
+    ingredients = Ingredient.objects.all()
     recipeIngredients = RecipeIngredient.objects.all()
     recipeForm = RecipeForm()
-    ctx = {'recipes':recipes, 'recipeIngredients':recipeIngredients, 
-        'recipeForm':recipeForm
+    ingredientForm = IngredientForm()
+    recipeIngredientForm = RecipeIngredientForm()
+    
+    if request.method == 'POST':
+        if 'aaa' in request.POST:
+            recipeForm = RecipeForm(request.POST)
+            if recipeForm.is_valid():
+                new_recipe = Recipe()
+                new_recipe.name = recipeForm.cleaned_data.get('name')
+                new_recipe.author = recipeForm.cleaned_data.get('author')
+                new_recipe.save()
+        elif 'bbb' in request.POST:
+            ingredientForm = IngredientForm(request.POST)
+            if ingredientForm.is_valid():
+                new_ingredient = Ingredient()
+                new_ingredient.name = ingredientForm.cleaned_data.get('name')
+                new_ingredient.save()
+        elif 'ccc' in request.POST:
+            recipeIngredientForm = RecipeIngredientForm(request.POST)
+            if recipeIngredientForm.is_valid():
+                new_recipeIngredient = RecipeIngredient()
+                new_recipeIngredient.quantity = recipeIngredientForm.cleaned_data.get('quantity')
+                new_recipeIngredient.ingredient = recipeIngredientForm.cleaned_data.get('ingredient')
+                new_recipeIngredient.recipe = recipeIngredientForm.cleaned_data.get('recipe')
+                new_recipeIngredient.save()
+
+    ctx = {'recipes':recipes, 'ingredients':ingredients,
+        'recipeIngredients':recipeIngredients, 'recipeForm':recipeForm, 
+        'ingredientForm':ingredientForm, 'recipeIngredientForm':recipeIngredientForm
     }
     
     return render(request, 'recipe_new.html', ctx)
