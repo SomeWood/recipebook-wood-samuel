@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.template import loader
-from .models import Ingredient, Recipe, RecipeIngredient
+from .models import Ingredient, Recipe, RecipeIngredient, RecipeImage
 from django.contrib.auth.decorators import login_required
 from .forms import RecipeForm, IngredientForm, RecipeIngredientForm
 
@@ -60,6 +60,12 @@ def recipe_new(request):
     }
     
     return render(request, 'recipe_new.html', ctx)
+
+@login_required
+def recipe_image(request, param):
+    recipe = Recipe.objects.get(id=param)
+
+    return render(request, 'recipe_image.html', {})
 
 def home_page(request):
     return redirect('/accounts/login')
