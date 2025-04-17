@@ -2,6 +2,7 @@
 {% load static%}
 
 {% block content%}
+<a href="/recipe/{{ recipe.id }}/add_image">Add a new image for this recipe</a>
 {% if recipe.image %}
 {% for image in recipe.image.all%}
 <img src="{{ image.image.url }}" alt="{{ image.description }}">

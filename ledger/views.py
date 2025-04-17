@@ -67,14 +67,15 @@ def recipe_image(request, pk):
     recipeImageForm = RecipeImageForm()
 
     if request.method == 'POST':
-        recipeImageForm = RecipeImageForm(request.POST)
+        recipeImageForm = RecipeImageForm(request.POST, request.FILES)
         if recipeImageForm.is_valid():
             new_recipeImage = RecipeImage()
             new_recipeImage.image = recipeImageForm.cleaned_data.get('image')
             new_recipeImage.description = recipeImageForm.cleaned_data.get('description')
-            new_recipeImage.recipe = recipe.name
+            new_recipeImage.recipe = recipe
             new_recipeImage.save()
-            return redirect('/recipe/' + str(pk))
+            redirectURL = '/recipe/' + str(pk)
+            return redirect(redirectURL)
 
 
     return render(request, 'recipe_image.html', {'recipe':recipe, 'recipeImageForm':recipeImageForm})
