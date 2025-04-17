@@ -18,5 +18,11 @@ def recipe_details(request, param):
 
     return render(request, 'recipe_details.html', {'recipe':recipe})
 
+@login_required
+def recipe_new(request):
+    recipes = Recipe.objects.all()
+
+    return render(request, 'recipe_list.html', {'recipes':recipes})
+
 def home_page(request):
     return redirect('/accounts/login')
