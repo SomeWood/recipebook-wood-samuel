@@ -38,3 +38,8 @@ class RecipeIngredient(models.Model):
 	quantity = models.TextField()
 	ingredient = models.ForeignKey(Ingredient, on_delete=models.CASCADE, related_name='recipe')
 	recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE, related_name='ingredients')
+
+class RecipeImage(models.Model):
+	image = models.ImageField()
+	description = models.TextField()
+	recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
