@@ -6,6 +6,9 @@ from .models import Ingredient, Recipe, RecipeIngredient
 class RecipeIngredientInline(admin.TabularInline):
 	model = RecipeIngredient
 
+class RecipeImageInline(admin.TabularInline):
+	model = RecipeImage
+
 class IngredientAdmin(admin.ModelAdmin):
 	model = Ingredient
 
@@ -13,14 +16,14 @@ class IngredientAdmin(admin.ModelAdmin):
 
 	list_display = ('name',)
 
-	inlines = [RecipeIngredientInline,]
+	inlines = [RecipeIngredientInline, RecipeImageInline]
 
 class RecipeAdmin(admin.ModelAdmin):
 	model = Recipe
 
 	search_fields = ('name',)
 
-	list_display = ('name', 'image')
+	list_display = ('name',)
 
 	inlines = [RecipeIngredientInline,]
 
@@ -33,6 +36,15 @@ class RecipeIngredientAdmin(admin.ModelAdmin):
 	list_display = ('quantity', 'ingredient', 'recipe',)
 
 	list_filter = ('recipe',)
+
+class RecipeImageAdmin(admin.ModelAdmin):
+	model = RecipeImage
+
+	search_fields = ('recipe', 'description',)
+
+	list_display = ('recipe', 'image', 'description',)
+
+
 
 admin.site.register(Ingredient, IngredientAdmin)
 admin.site.register(Recipe, RecipeAdmin)
