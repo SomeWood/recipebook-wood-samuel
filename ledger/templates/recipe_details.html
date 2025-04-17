@@ -2,6 +2,11 @@
 {% load static%}
 
 {% block content%}
+{% if recipe.image %}
+{% for image in recipe.image.all%}
+<img src="{{ image.image.url }}" alt="{{ image.description }}">
+{% endfor %}
+{% endif %}
 <h3>{{ recipe.name }}</h3>
 <p>Author: {{ recipe.author }}</p>
     <ul>
