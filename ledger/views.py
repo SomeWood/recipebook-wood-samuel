@@ -36,12 +36,14 @@ def recipe_new(request):
                 new_recipe.name = recipeForm.cleaned_data.get('name')
                 new_recipe.author = recipeForm.cleaned_data.get('author')
                 new_recipe.save()
+                return redirect('/recipe/add')
         elif 'bbb' in request.POST:
             ingredientForm = IngredientForm(request.POST)
             if ingredientForm.is_valid():
                 new_ingredient = Ingredient()
                 new_ingredient.name = ingredientForm.cleaned_data.get('name')
                 new_ingredient.save()
+                return redirect('/recipe/add')
         elif 'ccc' in request.POST:
             recipeIngredientForm = RecipeIngredientForm(request.POST)
             if recipeIngredientForm.is_valid():
@@ -50,6 +52,7 @@ def recipe_new(request):
                 new_recipeIngredient.ingredient = recipeIngredientForm.cleaned_data.get('ingredient')
                 new_recipeIngredient.recipe = recipeIngredientForm.cleaned_data.get('recipe')
                 new_recipeIngredient.save()
+                return redirect('/recipe/add')
 
     ctx = {'recipes':recipes, 'ingredients':ingredients,
         'recipeIngredients':recipeIngredients, 'recipeForm':recipeForm, 
