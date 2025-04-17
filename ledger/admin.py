@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Ingredient, Recipe, RecipeIngredient
+from .models import Ingredient, Recipe, RecipeIngredient, RecipeImage
 
 # Register your models here.
 
@@ -16,7 +16,7 @@ class IngredientAdmin(admin.ModelAdmin):
 
 	list_display = ('name',)
 
-	inlines = [RecipeIngredientInline, RecipeImageInline]
+	inlines = [RecipeIngredientInline]
 
 class RecipeAdmin(admin.ModelAdmin):
 	model = Recipe
@@ -25,7 +25,7 @@ class RecipeAdmin(admin.ModelAdmin):
 
 	list_display = ('name',)
 
-	inlines = [RecipeIngredientInline,]
+	inlines = [RecipeIngredientInline, RecipeImageInline]
 
 
 class RecipeIngredientAdmin(admin.ModelAdmin):
