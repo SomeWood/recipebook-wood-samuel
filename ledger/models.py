@@ -43,6 +43,3 @@ class RecipeImage(models.Model):
 	image = models.ImageField(upload_to='images/', null=False)
 	description = models.CharField(max_length=255)
 	recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE, related_name='image')
-
-	def __str__(self):
-		return str(self.description)

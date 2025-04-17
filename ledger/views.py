@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.template import loader
 from .models import Ingredient, Recipe, RecipeIngredient, RecipeImage
 from django.contrib.auth.decorators import login_required
-from .forms import RecipeForm, IngredientForm, RecipeIngredientForm
+from .forms import RecipeForm, IngredientForm, RecipeIngredientForm, RecipeImageForm
 
 # Create your views here.
 
@@ -62,10 +62,22 @@ def recipe_new(request):
     return render(request, 'recipe_new.html', ctx)
 
 @login_required
-def recipe_image(request, param):
-    recipe = Recipe.objects.get(id=param)
+def recipe_image(request, pk):
+    recipe = Recipe.objects.get(id=pk)
+    recipeImageForm = RecipeImageForm()
 
-    return render(request, 'recipe_image.html', {})
+    if request.method == 'POST':
+        recipeImageForm = RecipeImageForm(request.POST)
+        if recipeImageForm.is_valid():
+            new_recipeImage = RecipeImage()
+            new_recipeImage.image = recipeImageForm.cleaned_data.get('image')
+            new_recipeImage.description = recipeImageForm.cleaned_data.get('description')
+            new_recipeImage.recipe = recipe.name
+            new_recipeImage.save()
+            return redirect('/recipe/' + str(pk))
+
+
+    return render(request, 'recipe_image.html', {'recipe':recipe, 'recipeImageForm':recipeImageForm})
 
 def home_page(request):
     return redirect('/accounts/login')
